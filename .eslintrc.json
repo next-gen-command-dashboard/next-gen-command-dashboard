@@ -53,7 +53,8 @@
             {
                 "namedComponents": "function-declaration"
             }
-        ]
+        ],
+        "no-empty-function": "off"
     },
     "settings": {
         "import/resolver": {

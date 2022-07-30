@@ -14,7 +14,7 @@ function Dashboard(): JSX.Element {
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <Scene setModalData={setModalData} />
-      <Modal show={modalData !== undefined} onHide={() => { setModalData(undefined); }}>
+      <Modal size="xl" show={modalData !== undefined} onHide={() => { setModalData(undefined); }}>
         {
           modalData && (
             <>

@@ -47,7 +47,6 @@ function Model({
       }
       // eslint-disable-next-line no-param-reassign
       child.frustumCulled = false;
-      child.layers.enable(10);
       // eslint-disable-next-line no-param-reassign
       child.castShadow = true;
       // eslint-disable-next-line no-param-reassign

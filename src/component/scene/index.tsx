@@ -59,6 +59,8 @@ const Scene = React.memo(({ setModalData }: SceneProps): JSX.Element => (
         position={[-1.6, -0.75, 2]}
         rotation={[0, 0, 0]}
         setModalData={setModalData}
+        cameraFeedSrc="/texture/video-feed-sample/deepak-sample.png"
+        status="good"
       />
       <Person
         name="Jay"
@@ -71,6 +73,8 @@ const Scene = React.memo(({ setModalData }: SceneProps): JSX.Element => (
         position={[0, -4.6, 0]}
         rotation={[0, 0, 0]}
         setModalData={setModalData}
+        cameraFeedSrc="/texture/video-feed-sample/jay-sample.png"
+        status="bad"
       />
       <Suspense fallback={null}>
         <Model

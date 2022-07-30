@@ -19,3 +19,16 @@ cd next-gen-command-dashboard
 yarn
 yarn start
 ```
+
+
+## Screenshots
+
+![Screenshot](screenshot/screenshot-1.png)
+
+![Screenshot](screenshot/screenshot-2.png)
+
+![Screenshot](screenshot/screenshot-3.png)
+
+![Screenshot](screenshot/screenshot-4.png)
+
+![Screenshot](screenshot/screenshot-5.png)

@@ -1654,6 +1654,14 @@
     screen-space-reflections "^2.1.0"
     three-stdlib "^2.8.11"
 
+"@react-three/xr@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@react-three/xr/-/xr-4.1.0.tgz#6b3412dac6d86c7520807380e4c455c74807f28e"
+  integrity sha512-rd44xWm/Ha2ztcGs6Y8XpL8EwC8VIBKWQZ/dvGSngY5mHDyJEdJ2dxH/8T93IEA8ZH77Ss/WTnfIDks2kIGL6g==
+  dependencies:
+    three-stdlib "^2.12.1"
+    zustand "^3.7.1"
+
 "@restart/hooks@^0.4.6", "@restart/hooks@^0.4.7":
   version "0.4.7"
   resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.4.7.tgz#d79ca6472c01ce04389fc73d4a79af1b5e33cd39"
@@ -8762,7 +8770,7 @@ three-stdlib@^2.10.2:
     potpack "^1.0.1"
     zstddec "^0.0.2"
 
-three-stdlib@^2.8.11:
+three-stdlib@^2.12.1, three-stdlib@^2.8.11:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-2.13.0.tgz#48baf2f85a781437e42cd53f672ea44ccce4a801"
   integrity sha512-hFTTX6K6y8jrDREtzx1nl029rcOYJ5R8YBWg7M3s7uhcAx0fhs4d8tS+dj82vPksLDlMW8Pu/x0CVTRrqiUFDQ==

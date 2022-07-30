@@ -1,9 +1,16 @@
-import React, { useState, Suspense, useRef } from 'react';
-import { Plane, Text } from '@react-three/drei';
+import React, {
+  useState, Suspense, useRef, useEffect,
+} from 'react';
+import { Text } from '@react-three/drei';
 import { MeshLambertMaterial } from 'three';
 import * as THREE from 'three';
-import { Image, ModalHeader, ModalTitle } from 'react-bootstrap';
-import { ExtendedColors, useFrame, useThree } from '@react-three/fiber';
+import * as d3 from 'd3';
+import {
+  Col,
+  Container, Image, ModalTitle, Row,
+} from 'react-bootstrap';
+import { useFrame, useThree } from '@react-three/fiber';
+import ReactSpeedometer from 'react-d3-speedometer';
 import Model from './model';
 import { ModalDataProps } from '../dashboard';
 
@@ -84,7 +91,7 @@ function Person({
               </ModalTitle>
             ),
             body: (
-              <div className="glitch">
+              <div style={{ overflow: 'scroll' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <p style={{
                     borderRadius: '10px', fontWeight: 'bold', marginTop: '10px', padding: '8px', position: 'absolute', color: 'white', backgroundColor: 'red',
@@ -94,6 +101,65 @@ function Person({
                   </p>
                   <Image fluid srcSet={cameraFeedSrc} />
                 </div>
+                <Container fluid="xl" style={{ marginTop: '20px' }}>
+                  <Row className="justify-content-md-center">
+                    <Col className="justify-content-md-center">
+                      <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Direction</p>
+                      <p style={{
+                        textAlign: 'center', fontWeight: 'bold', fontSize: '30px',
+                      }}
+                      >
+                        281° W
+                      </p>
+                    </Col>
+                    <Col className="justify-content-md-center">
+                      <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Carbon Monoxide Level (PPM)</p>
+                      <div style={{ maxHeight: '180px', overflow: 'hidden' }}>
+                        <ReactSpeedometer
+                          width={300}
+                          height={300}
+                          value={Math.round(Math.random() * 1400)}
+                          maxValue={1600}
+                          customSegmentStops={[0, 35, 200, 800, 1600]}
+                          segmentColors={['rgba(24,255,0,0.71)', 'rgba(255,233,32,0.97)', '#ff9311', '#ff0202']}
+                          needleColor="black"
+                          customSegmentLabels={[
+                            {
+                              text: 'Okay',
+                              position: 'OUTSIDE' as any,
+                              color: 'black',
+                            },
+                            {
+                              text: '',
+                              position: 'OUTSIDE' as any,
+                              color: 'black',
+                            },
+                            {
+                              text: 'Bad',
+                              position: 'OUTSIDE' as any,
+                              color: 'black',
+                            },
+                            {
+                              text: 'Very Bad',
+                              position: 'OUTSIDE' as any,
+                              color: 'black',
+                            },
+                          ]}
+                        />
+                      </div>
+                    </Col>
+                    <Col className="justify-content-md-center">
+                      <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Altitude</p>
+                      <p style={{
+                        textAlign: 'center', fontWeight: 'bold', fontSize: '30px',
+                      }}
+                      >
+                        37.81 m
+                      </p>
+                      <div className="altitude-graph-container" />
+                    </Col>
+                  </Row>
+                </Container>
               </div>
             ),
             footer: null,

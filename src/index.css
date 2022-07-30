@@ -10,3 +10,7 @@ body {
 body > #root {
   height: 100vh;
 }
+
+.tick:nth-child(3n) text {
+  visibility: hidden;
+}

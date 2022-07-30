@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import Scene from '../scene';
+import { createLineChart } from '../scene/dataRender';
 
 export interface ModalDataProps {
   header: JSX.Element | null,
@@ -14,7 +15,14 @@ function Dashboard(): JSX.Element {
   return (
     <div style={{ width: '100%', height: '100%' }}>
       <Scene setModalData={setModalData} />
-      <Modal size="xl" show={modalData !== undefined} onHide={() => { setModalData(undefined); }}>
+      <Modal
+        size="lg"
+        show={modalData !== undefined}
+        onShow={() => {
+          createLineChart('.altitude-graph-container', '/sample-data/altitude.csv');
+        }}
+        onHide={() => { setModalData(undefined); }}
+      >
         {
           modalData && (
             <>

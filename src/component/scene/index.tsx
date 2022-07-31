@@ -15,7 +15,7 @@ import { ModalDataProps } from '../dashboard';
 
 interface SceneProps {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  setModalData: (modalData: ModalDataProps) => void;
+  setModalData: (modalData: ModalDataProps) => void,
 }
 
 function SkyBox(): null {
@@ -61,6 +61,9 @@ const Scene = React.memo(({ setModalData }: SceneProps): JSX.Element => (
         setModalData={setModalData}
         cameraFeedSrc="/texture/video-feed-sample/deepak-sample.png"
         status="good"
+        carbonMonoxideLevel={5}
+        ambientTemperature={73}
+        bodyTemperature={98.6}
       />
       <Person
         name="Jay"
@@ -75,6 +78,9 @@ const Scene = React.memo(({ setModalData }: SceneProps): JSX.Element => (
         setModalData={setModalData}
         cameraFeedSrc="/texture/video-feed-sample/jay-sample.png"
         status="bad"
+        carbonMonoxideLevel={1435}
+        ambientTemperature={73}
+        bodyTemperature={98.6}
       />
       <Suspense fallback={null}>
         <Model

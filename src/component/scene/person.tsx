@@ -1,10 +1,9 @@
 import React, {
-  useState, Suspense, useRef, useEffect,
+  useState, Suspense, useRef,
 } from 'react';
 import { Text } from '@react-three/drei';
 import { MeshLambertMaterial } from 'three';
 import * as THREE from 'three';
-import * as d3 from 'd3';
 import {
   Col,
   Container, Image, ModalTitle, Row,
@@ -13,6 +12,7 @@ import { useFrame, useThree } from '@react-three/fiber';
 import ReactSpeedometer from 'react-d3-speedometer';
 import Model from './model';
 import { ModalDataProps } from '../dashboard';
+import { createLineChart } from './dataRender';
 
 interface PersonProps {
   name: string,
@@ -25,10 +25,13 @@ interface PersonProps {
   setModalData: (modalData: ModalDataProps) => void,
   cameraFeedSrc: string | undefined,
   status: string,
+  carbonMonoxideLevel: number,
+  ambientTemperature: number,
+  bodyTemperature: number,
 }
 
 function Person({
-  name, currentAnimation, scale, position, rotation, animationFilePaths, setModalData, cameraFeedSrc, status,
+  name, currentAnimation, scale, position, rotation, animationFilePaths, setModalData, cameraFeedSrc, status, carbonMonoxideLevel, ambientTemperature, bodyTemperature,
 }: PersonProps): JSX.Element {
   const [isHovered, setIsHovered] = useState(false);
   const textRef = useRef<any>();
@@ -83,11 +86,14 @@ function Person({
           setModalData({
             header: (
               <ModalTitle style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                {name}
+                <div>{name}</div>
                 <div style={{
                   marginLeft: '10px', borderRadius: '100%', width: '20px', height: '20px', backgroundColor: `${statusColors[status]}`,
                 }}
                 />
+                <div style={{ marginLeft: '10px' }}>
+                  {` | (${position[0]}, ${position[1]}, ${position[2]})`}
+                </div>
               </ModalTitle>
             ),
             body: (
@@ -104,21 +110,12 @@ function Person({
                 <Container fluid="xl" style={{ marginTop: '20px' }}>
                   <Row className="justify-content-md-center">
                     <Col className="justify-content-md-center">
-                      <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Direction</p>
-                      <p style={{
-                        textAlign: 'center', fontWeight: 'bold', fontSize: '30px',
-                      }}
-                      >
-                        281° W
-                      </p>
-                    </Col>
-                    <Col className="justify-content-md-center">
                       <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Carbon Monoxide Level (PPM)</p>
                       <div style={{ maxHeight: '180px', overflow: 'hidden' }}>
                         <ReactSpeedometer
                           width={300}
                           height={300}
-                          value={Math.round(Math.random() * 1400)}
+                          value={carbonMonoxideLevel}
                           maxValue={1600}
                           customSegmentStops={[0, 35, 200, 800, 1600]}
                           segmentColors={['rgba(24,255,0,0.71)', 'rgba(255,233,32,0.97)', '#ff9311', '#ff0202']}
@@ -149,20 +146,34 @@ function Person({
                       </div>
                     </Col>
                     <Col className="justify-content-md-center">
-                      <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Altitude</p>
+                      <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Ambient Temperature</p>
                       <p style={{
                         textAlign: 'center', fontWeight: 'bold', fontSize: '30px',
                       }}
                       >
-                        37.81 m
+                        {`${ambientTemperature} °F`}
                       </p>
-                      <div className="altitude-graph-container" />
+                      <div className="ambient-temp-graph-container" />
+                    </Col>
+                    <Col className="justify-content-md-center">
+                      <p style={{ textAlign: 'center', fontWeight: 'bold' }}>Body Temperature</p>
+                      <p style={{
+                        textAlign: 'center', fontWeight: 'bold', fontSize: '30px',
+                      }}
+                      >
+                        {`${bodyTemperature} °F`}
+                      </p>
+                      <div className="body-temp-graph-container" />
                     </Col>
                   </Row>
                 </Container>
               </div>
             ),
             footer: null,
+            onShow: (() => {
+              createLineChart('.ambient-temp-graph-container', '/sample-data/altitude.csv');
+              createLineChart('.body-temp-graph-container', '/sample-data/altitude.csv');
+            }),
           });
         }}
         onPointerOver={() => {
